@@ -1,0 +1,21 @@
+name: Deploy with Kustomize
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          kustomize-version: '4.5.7'
+
+      - name: Deploy to Kubernetes
+        run: |
+          kustomize apply -k ./overlays/production
+          
