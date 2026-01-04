@@ -10,6 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug secrets presence
+        run: |
+          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
+            echo "AWS_ACCESS_KEY_ID is EMPTY"
+          else
+            echo "AWS_ACCESS_KEY_ID is SET"
+          fi
+
+          if [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
+            echo "AWS_SECRET_ACCESS_KEY is EMPTY"
+          else
+            echo "AWS_SECRET_ACCESS_KEY is SET"
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -33,4 +47,4 @@ jobs:
 
       - name: Deploy to Kubernetes using Kustomize
         run: |
-          kubectl apply -k ./overlays/production
+          kubectl apply -k ./overlays/prod
