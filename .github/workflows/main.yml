@@ -10,20 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug secrets presence
-        run: |
-          if [ -z "${{ secrets.AWS_ACCESS_KEY_ID }}" ]; then
-            echo "AWS_ACCESS_KEY_ID is EMPTY"
-          else
-            echo "AWS_ACCESS_KEY_ID is SET"
-          fi
-
-          if [ -z "${{ secrets.AWS_SECRET_ACCESS_KEY }}" ]; then
-            echo "AWS_SECRET_ACCESS_KEY is EMPTY"
-          else
-            echo "AWS_SECRET_ACCESS_KEY is SET"
-          fi
-
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -33,9 +19,10 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+
       - name: Verify AWS identity
         run: aws sts get-caller-identity
-    
+
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
