@@ -32,14 +32,14 @@ jobs:
         with:
           version: v1.32.0
 
-      # Update kubeconfig for EKS cluster
+      #  Update kubeconfig for EKS cluster
       - name: Update kubeconfig for EKS
         run: |
           aws eks update-kubeconfig \
             --region us-east-1 \
             --name my-eks-cluster
 
-      #  Test connectivity to cluster (optional)
+      # Test connectivity to cluster (optional)
       - name: Test cluster connectivity
         run: kubectl cluster-info
 
