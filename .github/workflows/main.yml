@@ -35,5 +35,6 @@ jobs:
             --name my-eks-cluster
 
       - name: Deploy to Kubernetes using Kustomize
+        working-directory: ./Kustomize-CICD   # <--- add this line
         run: |
-          kubectl apply -k ./overlays/prod
+          kubectl apply -k overlays/prod
