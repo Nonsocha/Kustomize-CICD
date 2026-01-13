@@ -17,3 +17,14 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
+          env:
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: nginx-config
+                  key: app_name
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: nginx-config
+                  key: log_level
