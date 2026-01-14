@@ -10,5 +10,11 @@ configMapGenerator:
       - app_name=nginx-production
       - log_level=info
 
+secretGenerator:
+  - name: nginx-secret
+    literals:
+      - db_username=prod_admin
+      - db_password=prod_password
+
 generatorOptions:
   disableNameSuffixHash: true
