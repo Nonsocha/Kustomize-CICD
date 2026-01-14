@@ -18,13 +18,28 @@ spec:
           ports:
             - containerPort: 80
           env:
+            # ConfigMap values
             - name: APP_NAME
               valueFrom:
                 configMapKeyRef:
                   name: nginx-config
                   key: app_name
+
             - name: LOG_LEVEL
               valueFrom:
                 configMapKeyRef:
                   name: nginx-config
                   key: log_level
+
+            # Secret values
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-secret
+                  key: db_username
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-secret
+                  key: db_password
